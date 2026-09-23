@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:travel_app/constants/string_const.dart';
-import 'package:travel_app/presentation/screens/home_screen.dart';
 import 'package:travel_app/routing/router.dart';
 
 void main() {
@@ -16,7 +15,8 @@ class MyApp extends StatelessWidget {
     return MaterialApp.router(
       title: StringConst.appTitle,
       theme: ThemeData(
-        brightness: .light
+        brightness: .light,
+        fontFamily: StringConst.appFontFamily
       ),
       builder: (_, child) => child!,
       routerConfig: router,
