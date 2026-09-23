@@ -106,19 +106,19 @@ class HomeScreen extends StatelessWidget {
           children: [
             const ColoredBox(color: AppColors.brandLime, child: SizedBox.expand()),
             Positioned(
-              left: -36,
+              left: -50,
               bottom: -4,
               top: -4,
               width: 280,
               child: Image.asset(
                 AppData.heroImagePath,
-                fit: .contain,
+                fit: .cover,
                 alignment: .bottomLeft,
               ),
             ),
             Positioned(
-              right: 8,
-              top: 54,
+              right: 0,
+              top: 50,
               width: 210,
               child: Column(
                 crossAxisAlignment: .start,
