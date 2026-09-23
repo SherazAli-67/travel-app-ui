@@ -22,4 +22,5 @@ class AppIcons {
   static const imgAirlineLogo = '${_imagesPath}img_airline_logo.png';
   static const imgBarcode = '${_imagesPath}img_barcode.png';
   static const imgMapBg = '${_imagesPath}img_map_bg.svg';
+  static const imgEarthMap = '${_imagesPath}img_earth_map.svg';
 }
