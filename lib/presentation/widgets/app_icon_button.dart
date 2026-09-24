@@ -12,7 +12,7 @@ class AppIconButton extends StatelessWidget {
     super.key,
     required this.iconPath,
     this.onTap,
-    this.size = 32,
+    this.size = 24,
     this.color = AppColors.white,
   });
 

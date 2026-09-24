@@ -12,7 +12,7 @@ class AppIcons {
   static const icTime = '${_iconsPath}ic_time.svg';
 
   static const imgBanner = '${_imagesPath}banner_img.png';
-  static const imgProfile = '${_imagesPath}img_profile.png';
+  static const imgProfile = '${_imagesPath}img_profile.jpeg';
   static const imgHeroTravel = '${_imagesPath}img_hero_travel.png';
   static const imgSingapore = '${_imagesPath}img_singapore.png';
   static const imgHongKong = '${_imagesPath}img_hong_kong.png';
@@ -23,4 +23,5 @@ class AppIcons {
   static const imgBarcode = '${_imagesPath}img_barcode.png';
   static const imgMapBg = '${_imagesPath}img_map_bg.svg';
   static const imgEarthMap = '${_imagesPath}img_earth_map.svg';
+  static const bgLinesImg = '${_imagesPath}bg_lines.png';
 }

@@ -88,41 +88,125 @@ class _FlightSearchScreenState extends State<FlightSearchScreen> {
   }
 
   Widget _buildMapHeader() {
-    return ColoredBox(
-      color: AppColors.baseBlack,
-      child: SizedBox(
-        height: 430,
-        width: double.infinity,
-        child: Stack(
-          clipBehavior: .hardEdge,
-          children: [
-            Positioned(
-              left: -140,
-              top: -100,
-              right: -100,
-              bottom: -60,
-              child: Opacity(
-                opacity: 0.5,
-                child: SvgPicture.asset(AppIcons.imgMapBg, fit: .cover,),
-              ),
+    return SizedBox(
+      height: 430,
+      child: Stack(
+        children: [
+          Container(
+            decoration: BoxDecoration(
+              image: DecorationImage(image: AssetImage(AppIcons.bgLinesImg,), fit: .cover),
+              color: AppColors.baseBlack
             ),
-            SafeArea(
-              bottom: false,
-              child: Padding(
-                padding: .fromLTRB(26, 12, 26, 20),
-                child: Column(
-                  crossAxisAlignment: .start,
-                  spacing: 24,
+            padding: .symmetric(vertical: 56, horizontal: 10),
+            height: 400,
+            width: .infinity,
+            child: Stack(
+              children: [
+                Row(
+                  spacing: 32,
                   children: [
-                    _buildTopBar(),
-                    Expanded(child: _buildRouteSection()),
-                    _buildTripTypeToggle(),
+                    SizedBox(
+                      width: 32,
+                      child: Column(
+                        spacing: 14,
+                        children: [
+                          AppIconButton(
+                            iconPath: AppIcons.icAeroplane,
+                            onTap: _swapAirports,
+                          ),
+                          Expanded(
+                            child: VerticalDivider(
+                              color: AppColors.white.withValues(alpha: 0.75),
+                              thickness: 1.2,
+                              width: 32,
+                            ),
+                          ),
+                          AppIconButton(
+                            iconPath: AppIcons.icSwap,
+                            onTap: _swapAirports,
+                          ),
+                          Expanded(
+                            child: VerticalDivider(
+                              color: AppColors.white.withValues(alpha: 0.75),
+                              thickness: 1.2,
+                              width: 32,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                    Expanded(child: Column(
+                      spacing: 32,
+                      children: [
+                        _buildTopBar(),
+                        Expanded(
+                          child: Column(
+                            crossAxisAlignment: .start,
+                            mainAxisAlignment: .spaceBetween,
+                            children: [
+                              _buildAirportRow(
+                                label: _fromLabel,
+                                city: _fromCity,
+                                time: _fromTime,
+                              ),
+                              const Spacer(),
+                              _buildAirportRow(
+                                label: _toLabel,
+                                city: _toCity,
+                                time: _toTime,
+                              ),
+                            ],
+                          ),
+                        )
+                      ],
+                    ))
                   ],
                 ),
+
+              ],
+            )
+
+           /* SizedBox(
+              height: 430,
+              width: double.infinity,
+              child: Stack(
+                clipBehavior: .hardEdge,
+                children: [
+                  Positioned(
+                    left: -140,
+                    top: -100,
+                    right: -100,
+                    bottom: -60,
+                    child: Opacity(
+                      opacity: 0.5,
+                      child: SvgPicture.asset(AppIcons.imgMapBg, fit: .cover,),
+                    ),
+                  ),
+                  SafeArea(
+                    bottom: false,
+                    child: Padding(
+                      padding: .fromLTRB(26, 12, 26, 20),
+                      child: Column(
+                        crossAxisAlignment: .start,
+                        spacing: 24,
+                        children: [
+                          _buildTopBar(),
+                          Expanded(child: _buildRouteSection()),
+                          _buildTripTypeToggle(),
+                        ],
+                      ),
+                    ),
+                  ),
+                ],
               ),
-            ),
-          ],
-        ),
+            ),*/
+          ),
+          Positioned(
+              bottom: 5,
+              left: 20,
+              right: 20,
+              child: _buildTripTypeToggle())
+        ],
       ),
     );
   }
@@ -130,67 +214,15 @@ class _FlightSearchScreenState extends State<FlightSearchScreen> {
   Widget _buildTopBar() {
     return Row(
       children: [
-        AppIconButton(iconPath: AppIcons.icAeroplane, size: 32,),
-        const SizedBox(width: 16,),
-        Expanded(child: Text(StringConst.plannedFlight, style: AppTextStyles.bodyBold,),),
-        Row(
-          spacing: 34,
-          children: [
-            AppIconButton(iconPath: AppIcons.icSearch,),
-            AppIconButton(iconPath: AppIcons.icNotification,),
-            AppIconButton(iconPath: AppIcons.icFilter,),
-          ],
-        ),
-      ],
-    );
-  }
-
-  Widget _buildRouteSection() {
-    return Row(
-      crossAxisAlignment: .start,
-      spacing: 24,
-      children: [
-        SizedBox(
-          width: 32,
-          child: Column(
-            children: [
-              Expanded(
-                child: VerticalDivider(
-                  color: AppColors.white.withValues(alpha: 0.75),
-                  thickness: 1.2,
-                  width: 32,
-                ),
-              ),
-              AppIconButton(
-                iconPath: AppIcons.icSwap,
-                size: 32,
-                onTap: _swapAirports,
-              ),
-              Expanded(
-                child: VerticalDivider(
-                  color: AppColors.white.withValues(alpha: 0.75),
-                  thickness: 1.2,
-                  width: 32,
-                ),
-              ),
-            ],
-          ),
-        ),
+        Text(StringConst.plannedFlight, style: AppTextStyles.bodyBold,),
         Expanded(
-          child: Column(
-            crossAxisAlignment: .start,
-            mainAxisAlignment: .spaceBetween,
+          child: Row(
+            spacing: 34,
+            mainAxisAlignment: .end,
             children: [
-              _buildAirportRow(
-                label: _fromLabel,
-                city: _fromCity,
-                time: _fromTime,
-              ),
-              _buildAirportRow(
-                label: _toLabel,
-                city: _toCity,
-                time: _toTime,
-              ),
+              AppIconButton(iconPath: AppIcons.icSearch,),
+              AppIconButton(iconPath: AppIcons.icNotification,),
+              AppIconButton(iconPath: AppIcons.icFilter,),
             ],
           ),
         ),
@@ -314,8 +346,8 @@ class _FlightSearchScreenState extends State<FlightSearchScreen> {
     return Container(
       width: double.infinity,
       height: 92,
-      padding: .symmetric(horizontal: 24, vertical: 18),
-      alignment: .centerLeft,
+      padding: .only(left: 62, ),
+      alignment: .center,
       decoration: BoxDecoration(
         color: AppColors.baseBlack,
         borderRadius: .circular(19),
@@ -335,7 +367,7 @@ class _FlightSearchScreenState extends State<FlightSearchScreen> {
   Widget _buildOffersSection() {
     return Column(
       crossAxisAlignment: .start,
-      spacing: 16,
+      spacing: 8,
       children: [
         SectionHeader(title: StringConst.offers,),
         ClipRRect(

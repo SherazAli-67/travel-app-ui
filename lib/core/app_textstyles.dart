@@ -56,7 +56,7 @@ class AppTextStyles {
 
   static const bodyBold = TextStyle(
     fontFamily: _font,
-    fontWeight: .w700,
+    fontWeight: .w800,
     fontSize: 17,
     color: AppColors.white,
   );

@@ -52,7 +52,6 @@ class HomeScreen extends StatelessWidget {
           angle: math.pi / 2,
           child: AppIconButton(
             iconPath: AppIcons.icBack,
-            size: 33,
             onTap: () {
               if (context.canPop()) context.pop();
             },

@@ -7,7 +7,7 @@ import 'package:travel_app/core/models/traveller_profile.dart';
 
 class AppData {
   static const profile = TravellerProfile(
-    name: 'Shashi Kumar',
+    name: 'Sheraz Ali',
     subtitle: 'Premium Traveller',
     avatarPath: AppIcons.imgProfile,
   );
