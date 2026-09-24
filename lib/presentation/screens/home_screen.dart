@@ -9,6 +9,7 @@ import 'package:travel_app/core/app_icons.dart';
 import 'package:travel_app/core/app_textstyles.dart';
 import 'package:travel_app/core/models/destination.dart';
 import 'package:travel_app/presentation/widgets/app_icon_button.dart';
+import 'package:travel_app/presentation/widgets/fade_slide_in.dart';
 import 'package:travel_app/presentation/widgets/primary_button.dart';
 import 'package:travel_app/presentation/widgets/section_header.dart';
 import 'package:travel_app/routing/router.dart';
@@ -27,17 +28,29 @@ class HomeScreen extends StatelessWidget {
             crossAxisAlignment: .start,
             spacing: 20,
             children: [
-              Column(
-                crossAxisAlignment: .start,
-                spacing: 32,
-                children: [
-                  _buildTopBar(context),
-                  _buildProfileHeader(),
-                ],
+              FadeSlideIn(
+                delay: Duration.zero,
+                child: Column(
+                  crossAxisAlignment: .start,
+                  spacing: 32,
+                  children: [
+                    _buildTopBar(context),
+                    _buildProfileHeader(),
+                  ],
+                ),
               ),
-              _buildHeroCard(context),
-              _buildDestinationSection(),
-              _buildHolidayPackagesSection(),
+              FadeSlideIn(
+                delay: const Duration(milliseconds: 80),
+                child: _buildHeroCard(context),
+              ),
+              FadeSlideIn(
+                delay: const Duration(milliseconds: 160),
+                child: _buildDestinationSection(),
+              ),
+              FadeSlideIn(
+                delay: const Duration(milliseconds: 320),
+                child: _buildHolidayPackagesSection(),
+              ),
             ],
           ),
         ),
@@ -46,21 +59,19 @@ class HomeScreen extends StatelessWidget {
   }
 
   Widget _buildTopBar(BuildContext context) {
-    //AppIcons,
     return Row(
       children: [
         Transform.rotate(
           angle: math.pi / 2,
-          //isBack,
-          child: const SizedBox()
+          child: AppIconButton(iconPath: AppIcons.icBack,),
         ),
         const Spacer(),
         Row(
           spacing: 34,
           children: [
-            //icSearch
-            // isNotifications
-            //icFilter
+            AppIconButton(iconPath: AppIcons.icSearch,),
+            AppIconButton(iconPath: AppIcons.icNotification,),
+            AppIconButton(iconPath: AppIcons.icFilter,),
           ],
         ),
       ],
@@ -72,16 +83,13 @@ class HomeScreen extends StatelessWidget {
     return Row(
       spacing: 16,
       children: [
-        ClipOval(
-          //profile.avatarPath, height:66, width:66,
-          child: const SizedBox()
-        ),
+        ClipOval(child: Image.asset(profile.avatarPath, height: 66,),),
         Column(
           crossAxisAlignment: .start,
           spacing: 2,
           children: [
-            //profile.name, profileName
-            //profile.subtitle, profileSubtitle
+            Text(profile.name, style: AppTextStyles.profileName,),
+            Text(profile.subtitle, style: AppTextStyles.profileSubtitle,),
           ],
         ),
       ],
@@ -96,14 +104,19 @@ class HomeScreen extends StatelessWidget {
         width: double.infinity,
         child: Stack(
           children: [
-            // const ColoredBox(color: AppColors.brandLime, child: SizedBox.expand()),
+            const ColoredBox(color: AppColors.brandLime, child: SizedBox.expand(),),
             Positioned(
               left: -50,
               bottom: -4,
               top: -4,
               width: 280,
-              //AppData.heroImagePath, alignment: bottomLeft, fit: cover
-              child: const SizedBox()
+              child: TweenAnimationBuilder<double>(
+                tween: Tween(begin: 0.96, end: 1),
+                duration: const Duration(milliseconds: 500),
+                curve: Curves.easeOutCubic,
+                builder: (_, value, child) => Transform.scale(scale: value, alignment: .bottomLeft, child: child,),
+                child: Image.asset(AppData.heroImagePath, fit: .cover, alignment: .bottomLeft,),
+              ),
             ),
             Positioned(
               right: 0,
@@ -113,10 +126,9 @@ class HomeScreen extends StatelessWidget {
                 crossAxisAlignment: .start,
                 spacing: 14,
                 children: [
-                  //heroHeadline, heroTitle
+                  Text(StringConst.heroHeadline, style: AppTextStyles.heroTitle,),
                   PrimaryButton(
-                    // label: StringConst.findTrip,
-                    label: '',
+                    label: StringConst.findTrip,
                     width: 181,
                     height: 53,
                     borderRadius: 36,
@@ -138,14 +150,18 @@ class HomeScreen extends StatelessWidget {
       crossAxisAlignment: .start,
       spacing: 20,
       children: [
-        // SectionHeader(title: StringConst.destination,),
+        SectionHeader(title: StringConst.destination,),
         SizedBox(
           height: 200,
           child: ListView.separated(
             scrollDirection: .horizontal,
             itemCount: AppData.destinations.length,
             separatorBuilder: (_, _) => const SizedBox(width: 9,),
-            itemBuilder: (_, index) => _buildDestinationCard(AppData.destinations[index]),
+            itemBuilder: (_, index) => FadeSlideIn(
+              delay: Duration(milliseconds: 160 + (index * 70)),
+              offset: const Offset(0.08, 0),
+              child: _buildDestinationCard(AppData.destinations[index]),
+            ),
           ),
         ),
       ],
@@ -160,11 +176,9 @@ class HomeScreen extends StatelessWidget {
         children: [
           ClipRRect(
             borderRadius: .circular(16),
-            //destination.imagePath, width: 126, height: 170, fit: cover
-            child: const SizedBox()
+            child: Image.asset(destination.imagePath, width: 126, height: 170, fit: .cover,),
           ),
-
-          //destination.name, destinationLabel, .center
+          Text(destination.name, style: AppTextStyles.destinationLabel,),
         ],
       ),
     );
@@ -175,12 +189,10 @@ class HomeScreen extends StatelessWidget {
       crossAxisAlignment: .start,
       spacing: 20,
       children: [
-        // SectionHeader(title: StringConst.holidayPackages,),
+        SectionHeader(title: StringConst.holidayPackages,),
         ClipRRect(
           borderRadius: .circular(20),
-          //image: AppData.holidayPackages.first.imagePath, width:.infinity, height: 168, fit: .cover
-          child: const SizedBox()
-
+          child: Image.asset(AppData.holidayPackages.first.imagePath, width: double.infinity, fit: .cover,),
         ),
       ],
     );

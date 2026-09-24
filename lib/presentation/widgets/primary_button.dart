@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:travel_app/core/app_colors.dart';
 import 'package:travel_app/core/app_textstyles.dart';
 
-class PrimaryButton extends StatelessWidget {
+class PrimaryButton extends StatefulWidget {
   final String label;
   final VoidCallback? onTap;
   final Color backgroundColor;
@@ -23,18 +23,33 @@ class PrimaryButton extends StatelessWidget {
   });
 
   @override
+  State<PrimaryButton> createState() => _PrimaryButtonState();
+}
+
+class _PrimaryButtonState extends State<PrimaryButton> {
+  bool _pressed = false;
+
+  @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: onTap,
-      child: Container(
-        width: width ?? double.infinity,
-        height: height,
-        alignment: .center,
-        decoration: BoxDecoration(
-          color: backgroundColor,
-          borderRadius: .circular(borderRadius),
+      onTapDown: (_) => setState(() => _pressed = true),
+      onTapUp: (_) => setState(() => _pressed = false),
+      onTapCancel: () => setState(() => _pressed = false),
+      onTap: widget.onTap,
+      child: AnimatedScale(
+        scale: _pressed ? 0.97 : 1,
+        duration: const Duration(milliseconds: 120),
+        curve: Curves.easeInOut,
+        child: Container(
+          width: widget.width ?? double.infinity,
+          height: widget.height,
+          alignment: .center,
+          decoration: BoxDecoration(
+            color: widget.backgroundColor,
+            borderRadius: .circular(widget.borderRadius),
+          ),
+          child: Text(widget.label, style: widget.textStyle ?? AppTextStyles.buttonBlack,),
         ),
-        child: Text(label, style: textStyle ?? AppTextStyles.buttonBlack,),
       ),
     );
   }
