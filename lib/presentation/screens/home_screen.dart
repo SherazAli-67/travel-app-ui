@@ -46,24 +46,21 @@ class HomeScreen extends StatelessWidget {
   }
 
   Widget _buildTopBar(BuildContext context) {
+    //AppIcons,
     return Row(
       children: [
         Transform.rotate(
           angle: math.pi / 2,
-          child: AppIconButton(
-            iconPath: AppIcons.icBack,
-            onTap: () {
-              if (context.canPop()) context.pop();
-            },
-          ),
+          //isBack,
+          child: const SizedBox()
         ),
         const Spacer(),
         Row(
           spacing: 34,
           children: [
-            AppIconButton(iconPath: AppIcons.icSearch,),
-            AppIconButton(iconPath: AppIcons.icNotification,),
-            AppIconButton(iconPath: AppIcons.icFilter,),
+            //icSearch
+            // isNotifications
+            //icFilter
           ],
         ),
       ],
@@ -76,19 +73,15 @@ class HomeScreen extends StatelessWidget {
       spacing: 16,
       children: [
         ClipOval(
-          child: Image.asset(
-            profile.avatarPath,
-            width: 66,
-            height: 66,
-            fit: .cover,
-          ),
+          //profile.avatarPath, height:66, width:66,
+          child: const SizedBox()
         ),
         Column(
           crossAxisAlignment: .start,
           spacing: 2,
           children: [
-            Text(profile.name, style: AppTextStyles.profileName,),
-            Text(profile.subtitle, style: AppTextStyles.profileSubtitle,),
+            //profile.name, profileName
+            //profile.subtitle, profileSubtitle
           ],
         ),
       ],
@@ -103,17 +96,14 @@ class HomeScreen extends StatelessWidget {
         width: double.infinity,
         child: Stack(
           children: [
-            const ColoredBox(color: AppColors.brandLime, child: SizedBox.expand()),
+            // const ColoredBox(color: AppColors.brandLime, child: SizedBox.expand()),
             Positioned(
               left: -50,
               bottom: -4,
               top: -4,
               width: 280,
-              child: Image.asset(
-                AppData.heroImagePath,
-                fit: .cover,
-                alignment: .bottomLeft,
-              ),
+              //AppData.heroImagePath, alignment: bottomLeft, fit: cover
+              child: const SizedBox()
             ),
             Positioned(
               right: 0,
@@ -123,9 +113,10 @@ class HomeScreen extends StatelessWidget {
                 crossAxisAlignment: .start,
                 spacing: 14,
                 children: [
-                  Text(StringConst.heroHeadline, style: AppTextStyles.heroTitle,),
+                  //heroHeadline, heroTitle
                   PrimaryButton(
-                    label: StringConst.findTrip,
+                    // label: StringConst.findTrip,
+                    label: '',
                     width: 181,
                     height: 53,
                     borderRadius: 36,
@@ -147,7 +138,7 @@ class HomeScreen extends StatelessWidget {
       crossAxisAlignment: .start,
       spacing: 20,
       children: [
-        SectionHeader(title: StringConst.destination,),
+        // SectionHeader(title: StringConst.destination,),
         SizedBox(
           height: 200,
           child: ListView.separated(
@@ -169,14 +160,11 @@ class HomeScreen extends StatelessWidget {
         children: [
           ClipRRect(
             borderRadius: .circular(16),
-            child: Image.asset(
-              destination.imagePath,
-              width: 126,
-              height: 170,
-              fit: .cover,
-            ),
+            //destination.imagePath, width: 126, height: 170, fit: cover
+            child: const SizedBox()
           ),
-          Text(destination.name, style: AppTextStyles.destinationLabel, textAlign: .center,),
+
+          //destination.name, destinationLabel, .center
         ],
       ),
     );
@@ -187,15 +175,12 @@ class HomeScreen extends StatelessWidget {
       crossAxisAlignment: .start,
       spacing: 20,
       children: [
-        SectionHeader(title: StringConst.holidayPackages,),
+        // SectionHeader(title: StringConst.holidayPackages,),
         ClipRRect(
           borderRadius: .circular(20),
-          child: Image.asset(
-            AppData.holidayPackages.first.imagePath,
-            width: double.infinity,
-            height: 168,
-            fit: .cover,
-          ),
+          //image: AppData.holidayPackages.first.imagePath, width:.infinity, height: 168, fit: .cover
+          child: const SizedBox()
+
         ),
       ],
     );
