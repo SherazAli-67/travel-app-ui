@@ -42,7 +42,6 @@ class BoardingPassScreen extends StatelessWidget {
       angle: math.pi / 2,
       child: AppIconButton(
         iconPath: AppIcons.icBack,
-        size: 33,
         onTap: () {
           if (context.canPop()) context.pop();
         },
@@ -56,34 +55,7 @@ class BoardingPassScreen extends StatelessWidget {
       crossAxisAlignment: .center,
       children: [
         Text(pass.fromCode, style: AppTextStyles.airportCode,),
-        SizedBox(
-          width: 100,
-          height: 110,
-          child: Stack(
-            alignment: .center,
-            children: [
-              Container(
-                width: 86,
-                height: 86,
-                decoration: BoxDecoration(
-                  shape: .circle,
-                  border: .all(color: AppColors.white.withValues(alpha: 0.35), width: 1.2),
-                ),
-              ),
-              Column(
-                mainAxisSize: .min,
-                spacing: 4,
-                children: [
-                  Transform.rotate(
-                    angle: math.pi / 4,
-                    child: AppIconButton(iconPath: AppIcons.icAeroplane, size: 28,),
-                  ),
-                  Text(pass.duration, style: AppTextStyles.duration,),
-                ],
-              ),
-            ],
-          ),
-        ),
+        SvgPicture.asset(AppIcons.icBoardingPassFlight),
         Text(pass.toCode, style: AppTextStyles.airportCode,),
       ],
     );
@@ -237,28 +209,12 @@ class BoardingPassScreen extends StatelessWidget {
   Widget _buildNotch() {
     return Container(
       width: 24,
-      height: 24,
+      height: 22,
       decoration: BoxDecoration(
-        color: AppColors.baseBlack,
+        color: AppColors.borderGreen,
         shape: .circle,
-        boxShadow: [
-          BoxShadow(
-            color: AppColors.brandLime.withValues(alpha: 0.9),
-            blurRadius: 12,
-            spreadRadius: 1,
-          ),
-        ],
       ),
-      child: Center(
-        child: Container(
-          width: 10,
-          height: 10,
-          decoration: const BoxDecoration(
-            color: AppColors.brandLime,
-            shape: .circle,
-          ),
-        ),
-      ),
+
     );
   }
 }

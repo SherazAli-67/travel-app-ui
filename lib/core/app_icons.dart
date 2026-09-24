@@ -10,6 +10,7 @@ class AppIcons {
   static const icSearch = '${_iconsPath}ic_search.svg';
   static const icSwap = '${_iconsPath}ic_swap.svg';
   static const icTime = '${_iconsPath}ic_time.svg';
+  static const icBoardingPassFlight = '${_iconsPath}boarding_pass_flight.svg';
 
   static const imgBanner = '${_imagesPath}banner_img.png';
   static const imgProfile = '${_imagesPath}img_profile.jpeg';
